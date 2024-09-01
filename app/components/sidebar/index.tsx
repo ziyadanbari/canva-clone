@@ -1,0 +1,72 @@
+"use client";
+
+import React, { useState } from "react";
+import { sidebarOptions } from "../../constants";
+import Option from "./Option";
+import { Box, Stack } from "@mui/material";
+import { Drawers } from "@/app/types";
+import { AnimatePresence, motion, useAnimate } from "framer-motion";
+import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
+
+import SidebarDrawer from "../drawers";
+
+const Sidebar = () => {
+  const [activeDrawer, setActiveDrawer] = useState<Drawers | undefined>(
+    Drawers.Shape
+  );
+  return (
+    <>
+      <Box className="w-[100px] h-full bg-white/[.05] backdrop-blur-lg py-6 px-4 relative z-20 border-r border-[#313131] ">
+        <Stack flexDirection={"column"} alignItems={"center"} gap={4}>
+          {sidebarOptions.map((option) => (
+            <Option
+              key={option.id}
+              active={activeDrawer === option.id}
+              setActiveDrawer={setActiveDrawer}
+              {...option}
+            />
+          ))}
+        </Stack>
+      </Box>
+      <AnimatePresence>
+        {activeDrawer && (
+          <motion.div
+            className=" absolute w-[250px] h-full border border-[#313131] bg-[#1e1e1e] py-6 px-4"
+            initial={{
+              left: "-200px",
+            }}
+            animate={{
+              left: "100px",
+              transition: {
+                duration: 0.5,
+                type: "spring",
+              },
+            }}
+            exit={{
+              left: "-200px",
+            }}>
+            <Stack
+              className="w-full h-full"
+              zIndex={10}
+              flexDirection={"column"}>
+              <Stack className="flex-1">
+                <SidebarDrawer activeDrawer={activeDrawer} />
+              </Stack>
+              <Stack>
+                <Box
+                  className=" w-fit p-2 pr-[.6em] rounded-full hover:bg-white/10 cursor-pointer"
+                  onClick={() => {
+                    setActiveDrawer(undefined);
+                  }}>
+                  <ArrowBackIosNewOutlinedIcon />
+                </Box>
+              </Stack>
+            </Stack>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
+
+export default Sidebar;
