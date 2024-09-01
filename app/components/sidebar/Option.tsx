@@ -1,4 +1,5 @@
 import type { Drawers, ISidebarOption, SetSate } from "@/app/types";
+import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
 
 const Option = ({
@@ -9,16 +10,16 @@ const Option = ({
   setActiveDrawer,
 }: ISidebarOption & { setActiveDrawer?: SetSate<Drawers | undefined> }) => {
   return (
-    <div
-      className={` w-full flex flex-col gap-1 items-center justify-center hover:bg-white/10 rounded-md p-2 cursor-pointer ${
-        active ? "bg-white/10" : "bg-none"
+    <Stack
+      className={` w-full flex flex-col gap-1 items-center justify-center hover:bg-hover-glass-bg rounded-md p-2 cursor-pointer ${
+        active ? "bg-hover-glass-bg" : "bg-none"
       }`}
       onClick={() => action && setActiveDrawer && action(setActiveDrawer)}>
-      <div>
+      <Box>
         <Icon />
-      </div>
-      <div>{label}</div>
-    </div>
+      </Box>
+      <Typography className="text-main" >{label}</Typography>
+    </Stack>
   );
 };
 

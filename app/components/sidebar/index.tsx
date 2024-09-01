@@ -7,8 +7,8 @@ import { Box, Stack } from "@mui/material";
 import { Drawers } from "@/app/types";
 import { AnimatePresence, motion, useAnimate } from "framer-motion";
 import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
-
 import SidebarDrawer from "../drawers";
+import ToggleDarkMode from "../ToggleDarkMode";
 
 const Sidebar = () => {
   const [activeDrawer, setActiveDrawer] = useState<Drawers | undefined>(
@@ -16,22 +16,31 @@ const Sidebar = () => {
   );
   return (
     <>
-      <Box className="w-[100px] h-full bg-white/[.05] backdrop-blur-lg py-6 px-4 relative z-20 border-r border-[#313131] ">
-        <Stack flexDirection={"column"} alignItems={"center"} gap={4}>
-          {sidebarOptions.map((option) => (
-            <Option
-              key={option.id}
-              active={activeDrawer === option.id}
-              setActiveDrawer={setActiveDrawer}
-              {...option}
-            />
-          ))}
+      <Box className="w-[100px] h-full bg-white/[.05] backdrop-blur-lg py-6 px-4 relative z-20 border-r border-main-border ">
+        <Stack
+          height={"100%"}
+          flexDirection={"column"}
+          justifyContent={"space-between"}
+          gap={3}>
+          <Stack flexDirection={"column"} alignItems={"center"} gap={4}>
+            {sidebarOptions.map((option) => (
+              <Option
+                key={option.id}
+                active={activeDrawer === option.id}
+                setActiveDrawer={setActiveDrawer}
+                {...option}
+              />
+            ))}
+          </Stack>
+          <Stack flexDirection={"row"} justifyContent={"center"}>
+            <ToggleDarkMode />
+          </Stack>
         </Stack>
       </Box>
       <AnimatePresence>
         {activeDrawer && (
           <motion.div
-            className=" absolute w-[250px] h-full border border-[#313131] bg-[#1e1e1e] py-6 px-4"
+            className=" absolute w-[250px] h-full border-r border-main-border bg-main-background py-6 px-4"
             initial={{
               left: "-200px",
             }}

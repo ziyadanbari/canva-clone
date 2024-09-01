@@ -1,10 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import colorSchemeSlice from "./reducers/colorSchemeReducer";
 import canvasDataSlice from "./reducers/canvaDataReducer";
 
 export const store = configureStore({
   reducer: {
-    colorScheme: colorSchemeSlice,
     canvas: canvasDataSlice,
   },
 });
