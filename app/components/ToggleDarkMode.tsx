@@ -10,7 +10,6 @@ const ToggleDarkMode = () => {
         if (mode === 'dark') setMode('light')
         else setMode('dark')
     }
-    console.log(mode)
   return (
     <Box className=" w-fit p-2 rounded-full hover:bg-hover-glass-bg cursor-pointer" onClick={toggleTheme}>
         {mode === 'dark' ? <LightModeIcon/> : <DarkModeIcon/>}

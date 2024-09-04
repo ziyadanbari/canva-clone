@@ -1,5 +1,5 @@
-import type { ISidebarOption } from "../types";
-import { Drawers } from "../types";
+import type { ISidebarOption, Shape } from "../types";
+import { Drawers, Shapes } from "../types";
 import CategoryOutlinedIcon from "@mui/icons-material/CategoryOutlined";
 import FormatColorTextOutlinedIcon from "@mui/icons-material/FormatColorTextOutlined";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
@@ -39,3 +39,39 @@ export const sidebarOptions: ISidebarOption[] = [
     },
   },
 ];
+
+export const defaultShapes: Record<
+  Exclude<Shapes, Shapes.line>,
+  Omit<Shape, "id">
+> = {
+  square: {
+    type: Shapes.square,
+    position: {
+      x: 440 / 2,
+      y: 400 / 2,
+    },
+    fill: "#c4c4c4",
+    width: 100,
+    height: 100,
+  },
+  circle: {
+    type: Shapes.circle,
+    position: {
+      x: 440 / 2,
+      y: 400 / 2,
+    },
+    fill: "#c4c4c4",
+    width: 100,
+    height: 100,
+  },
+  star: {
+    type: Shapes.star,
+    position: {
+      x: 440 / 2,
+      y: 400 / 2,
+    },
+    fill: "#c4c4c4",
+    width: 100,
+    height: 100,
+  },
+};

@@ -22,14 +22,14 @@ const theme = createTheme({
       palette: {
         "main-border": "#20202040",
         "main-background": "#eee",
-        "hover-glass-bg": "#0000001a",
+        "hover-glass-bg": "#d2d2d2",
       },
     },
     dark: {
       palette: {
         "main-border": "#313131",
         "main-background": "#1e1e1e",
-        "hover-glass-bg": "#ffffff1a",
+        "hover-glass-bg": "#2c2c2c",
       },
     },
   },

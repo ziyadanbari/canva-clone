@@ -7,6 +7,13 @@ export enum ColorSchemes {
   system = "system",
 }
 
+export enum Shapes {
+  circle = "circle",
+  square = "square",
+  star = "star",
+  line = "line",
+}
+
 export enum Items {
   shape = "shape",
   text = "text",
@@ -33,7 +40,7 @@ export type ISidebarOption = {
 export type Position = {
   x: number;
   y: number;
-  zIndex: number;
+  zIndex?: number;
 };
 
 export type Color = string | number;
@@ -47,10 +54,16 @@ export type Border = {
 
 export type StarProps = {
   numPoints?: number;
+  innerRadius?: number;
+  outerRadius?: number;
 };
 
 export type LineProps = {
   points: Pick<Position, "x" | "y">[];
+};
+
+export type CircleProps = {
+  radius: number;
 };
 
 export type Image = {
@@ -82,12 +95,13 @@ export type Text = {
 
 export type Shape = {
   id: string;
-  type: "circle" | "square" | "star" | "line";
+  type: Shapes;
   position?: Position;
   fill?: Color;
   width?: number;
   height?: number;
   border?: Border;
+  circleProps?: CircleProps;
   starProps?: StarProps;
   lineProps?: LineProps;
 };

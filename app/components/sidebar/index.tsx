@@ -16,7 +16,7 @@ const Sidebar = () => {
   );
   return (
     <>
-      <Box className="w-[100px] h-full bg-white/[.05] backdrop-blur-lg py-6 px-4 relative z-20 border-r border-main-border ">
+      <Box className="w-[100px] h-full bg-main-background py-6 px-4 relative z-40 border-r border-main-border ">
         <Stack
           height={"100%"}
           flexDirection={"column"}
@@ -40,7 +40,7 @@ const Sidebar = () => {
       <AnimatePresence>
         {activeDrawer && (
           <motion.div
-            className=" absolute w-[250px] h-full border-r border-main-border bg-main-background py-6 px-4"
+            className=" absolute w-[250px] h-full border-r border-main-border bg-main-background py-6 px-4 z-30"
             initial={{
               left: "-200px",
             }}

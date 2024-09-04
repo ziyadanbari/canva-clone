@@ -3,7 +3,7 @@ import { Box, Stack } from "@mui/material";
 import Sidebar from "./components/sidebar";
 import Navbar from "./components/navbar";
 import { useAppDispatch, useAppSelector } from "./hooks/app";
-
+import Canvas from './components/canvas'
 export default function Home() {
   const canvas = useAppSelector(state => state.canvas)
   const dispatch = useAppDispatch()
@@ -16,9 +16,9 @@ export default function Home() {
         <Box>
           <Navbar/>
         </Box>
-        <Box>
-          
-        </Box>
+        <Stack className="flex items-center justify-center flex-1">
+          <Canvas/>
+        </Stack>
       </Stack>
     </Stack>
   );

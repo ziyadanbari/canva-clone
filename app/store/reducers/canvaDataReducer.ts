@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   addItemToCanvasAction,
   addItemToHistoryAction,
+  selectItemAction,
+  updateItemAction,
 } from "../actions/canvaDataActions";
 
 const initialState = {
@@ -21,9 +23,16 @@ const canvasDataSlice = createSlice({
   reducers: {
     addItemToCanvas: addItemToCanvasAction,
     addItemToHistory: addItemToHistoryAction,
+    updateItemInCanvas: updateItemAction,
+    selectItem: selectItemAction,
   },
 });
 
-export const { addItemToHistory, addItemToCanvas } = canvasDataSlice.actions;
+export const {
+  addItemToHistory,
+  addItemToCanvas,
+  updateItemInCanvas,
+  selectItem,
+} = canvasDataSlice.actions;
 
 export default canvasDataSlice.reducer;

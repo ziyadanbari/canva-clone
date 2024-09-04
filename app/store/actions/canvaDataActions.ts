@@ -7,11 +7,18 @@ import {
   Text,
 } from "@/app/types";
 import { createUniqueId } from "@/app/utils/createUniqueId";
+import { findItemById } from "@/app/utils/findItemById";
 import { PayloadAction } from "@reduxjs/toolkit";
 
 interface IAddItemToCanvasPayload {
   item: Omit<Image | Shape | Text, "id">;
   type: Items;
+}
+
+interface IUpdateItemPayload {
+  itemId: string;
+  itemType: Items;
+  dataToUpdate: Partial<Image | Text | Shape>;
 }
 
 export const addItemToHistoryAction = (
@@ -43,4 +50,41 @@ export const addItemToCanvasAction = (
     timestamp: new Date().getTime(),
     disabled: false,
   });
+};
+
+export const updateItemAction = (
+  state: CanvasData,
+  action: PayloadAction<IUpdateItemPayload>
+) => {
+  const payload = action.payload;
+  const { itemType, itemId, dataToUpdate } = payload;
+  if (!itemId) return;
+  if (itemType === Items.image)
+    state.items.images =
+      state.items.images?.map((item) =>
+        item.id === itemId ? { ...item, ...(dataToUpdate as Image) } : item
+      ) || [];
+  else if (itemType === Items.shape) {
+    state.items.shapes = state.items.shapes?.map((item) =>
+      item.id === itemId ? { ...item, ...(dataToUpdate as Shape) } : item
+    );
+  } else if (itemType === Items.text)
+    state.items.texts = state.items.texts?.map((item) =>
+      item.id === itemId ? { ...item, ...(dataToUpdate as Text) } : item
+    );
+  const item = findItemById(state.items, itemId);
+  state.history.push({
+    id: itemId,
+    data: { ...item, ...dataToUpdate },
+    type: itemType,
+    timestamp: new Date().getTime(),
+    disabled: false,
+  });
+};
+
+export const selectItemAction = (
+  state: CanvasData,
+  action: PayloadAction<{ id: string }>
+) => {
+  state.items.selectedItem = action.payload.id;
 };
